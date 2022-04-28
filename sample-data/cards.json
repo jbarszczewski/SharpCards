@@ -1,0 +1,17 @@
+﻿[
+  {
+    "id": "861885ae-5c34-4604-a9c3-bdcf580d9815",
+    "frontText": "Something",
+    "backText": "Qualcosa"
+  },
+  {
+    "id": "da60c64b-7a67-460a-84ae-70d269d1795c",
+    "frontText": "An apple",
+    "backText": "Una Mela"
+  },
+  {
+    "id": "1790c1bf-62e7-4faf-83ba-4eb34dbd415b",
+    "frontText": "This is a test. That is slightly longer sentence. And one more.",
+    "backText": "Questo è un test. Questa è una frase leggermente più lunga. E un altro ancora."
+  }
+]
