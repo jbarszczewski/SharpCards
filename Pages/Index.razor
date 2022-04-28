@@ -1,5 +1,5 @@
 ﻿@page "/"
-@inject HttpClient Http
+@inject CardsService cardsService;
 @using SharpCards.Models;
 
 <PageTitle>Index</PageTitle>
@@ -7,7 +7,7 @@
 <h1>Cards!</h1>
 @if (cards == null)
 {
-    <p><em>Loading...</em></p>
+	<p><em>Loading...</em></p>
 }
 else
 {
@@ -15,23 +15,26 @@ else
 	<CardDetails Card=currentCard />
 }
 @code {
-	private CardContent currentCard = new CardContent();
-	
-    private CardContent[]? cards;
+	private Card currentCard = new Card();
 
-    protected override async Task OnInitializedAsync()
-    {
-        cards = await Http.GetFromJsonAsync<CardContent[]>("sample-data/cards.json");
-		currentCard = cards != null ? cards[0] : new CardContent{
+	private Card[]? cards;
+
+	protected override async Task OnInitializedAsync()
+	{
+		cards = await cardsService.GetCards();
+		currentCard = cards != null ? cards[0] : new Card
+		{
 			Id = Guid.Empty,
 			FrontText = "Front: No cards found",
 			BackText = "Back: No cards found"
 		};
-    }
+	}
 
 	private void GetRandom()
 	{
-		currentCard = cards != null ? cards.Where(c => c.Id != currentCard.Id).ToArray()[new Random().Next(0, cards.Length - 1)] : new CardContent{
+		currentCard = cards != null ? cards.Where(c => c.Id != currentCard.Id).ToArray()[new Random().Next(0, cards.Length - 1)]
+		: new Card
+		{
 			Id = Guid.Empty,
 			FrontText = "Front: No cards found",
 			BackText = "Back: No cards found"

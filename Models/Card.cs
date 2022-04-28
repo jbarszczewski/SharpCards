@@ -1,6 +1,6 @@
 namespace SharpCards.Models
 {
-	public class CardContent
+	public class Card
 	{
 		public Guid Id { get; set; }
 		public string FrontText { get; set; } = string.Empty;
