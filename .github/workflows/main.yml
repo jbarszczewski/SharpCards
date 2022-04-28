@@ -1,0 +1,25 @@
+name: Deploy to GitHub Pages
+
+# Run workflow on every push to the master branch
+on:
+  push:
+    branches: [ main ]
+    
+jobs:
+  deploy-to-github-pages:
+    # use ubuntu-latest image to run steps on
+    runs-on: ubuntu-latest
+    steps:
+    # uses GitHub's checkout action to checkout code form the master branch
+    - name: Code Checkout
+      uses: actions/checkout@v3.0.0
+    
+    # sets up .NET 6.0 SDK
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v2.0.0
+      with:
+        dotnet-version: 6.0.202
+        
+    # publishes Blazor project to the release-folder
+    - name: Publish .NET Project
+      run: dotnet publish SharpCards.csproj -c Release -o release --nologo
