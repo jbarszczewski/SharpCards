@@ -23,3 +23,11 @@ jobs:
     # publishes Blazor project to the release-folder
     - name: Publish .NET Project
       run: dotnet publish SharpCards.csproj -c Release -o release --nologo
+
+    # deploys release to gh pages
+    - name: Commit wwwroot to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@4.3.3
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: release/wwwroot
