@@ -1,9 +1,40 @@
 ﻿@page "/"
+@inject HttpClient Http
+@using SharpCards.Models;
 
 <PageTitle>Index</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>Cards!</h1>
+@if (cards == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+	<button class="btn btn-primary" @onclick="GetRandom">Give me random!</button>
+	<CardDetails Card=currentCard />
+}
+@code {
+	private CardContent currentCard = new CardContent();
+	
+    private CardContent[]? cards;
 
-Welcome to your new app.
+    protected override async Task OnInitializedAsync()
+    {
+        cards = await Http.GetFromJsonAsync<CardContent[]>("sample-data/cards.json");
+		currentCard = cards != null ? cards[0] : new CardContent{
+			Id = Guid.Empty,
+			FrontText = "Front: No cards found",
+			BackText = "Back: No cards found"
+		};
+    }
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+	private void GetRandom()
+	{
+		currentCard = cards != null ? cards.Where(c => c.Id != currentCard.Id).ToArray()[new Random().Next(0, cards.Length - 1)] : new CardContent{
+			Id = Guid.Empty,
+			FrontText = "Front: No cards found",
+			BackText = "Back: No cards found"
+		};
+	}
+}

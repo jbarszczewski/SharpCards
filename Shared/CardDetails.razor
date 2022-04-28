@@ -1,0 +1,13 @@
+﻿@using SharpCards.Models;
+
+<div class="alert alert-secondary mt-4">
+    <strong>@Card.FrontText</strong>
+    <br />
+    <span>@Card.BackText</span>
+
+</div>
+
+@code {
+    [Parameter]
+    public CardContent Card { get; set; } = new CardContent();
+}
