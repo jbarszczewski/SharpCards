@@ -33,11 +33,11 @@
       "url": "_framework\/icudt.dat"
     },
     {
-      "hash": "sha256-JQ0jD0dSeCHTs0K3f\/9\/m79u0FDEmm1ek6QbGBPEMv0=",
+      "hash": "sha256-6JGNzyL2C8H3\/zwv6WdKlc5li\/+fOq4tBASwAp7zKp0=",
       "url": "_framework\/blazor.boot.json"
     },
     {
-      "hash": "sha256-wPEowIpj2zYIHYkQ23oSIxzKysapk41Noww\/jQSY6Hc=",
+      "hash": "sha256-oIo1\/zrR06YpJ4msRK9dSC+Ak084x\/bLH1P3063UPPg=",
       "url": "_framework\/Microsoft.AspNetCore.Components.dll"
     },
     {
@@ -61,7 +61,7 @@
       "url": "_framework\/Microsoft.Extensions.Configuration.Json.dll"
     },
     {
-      "hash": "sha256-MEHKc0M7hYiABomb4CHQOjBIMPiLza7jH33FpD8DiFQ=",
+      "hash": "sha256-yKPlCFYmY8G6vEZS4QOpKuosv4bjd\/AaLPYNFEWqigE=",
       "url": "_framework\/Microsoft.Extensions.DependencyInjection.Abstractions.dll"
     },
     {
@@ -93,7 +93,7 @@
       "url": "_framework\/Microsoft.JSInterop.WebAssembly.dll"
     },
     {
-      "hash": "sha256-1VDGKHT+zUmv1sgi1dkHtWbgoDZwBOEcd8sg1TA7Xlo=",
+      "hash": "sha256-0WgKd\/ajJVMf6Ds1Mw81eSINdkHZ2UacELJtgOKqn7g=",
       "url": "_framework\/SharpCards.dll"
     },
     {
@@ -101,7 +101,7 @@
       "url": "_framework\/System.Collections.Concurrent.dll"
     },
     {
-      "hash": "sha256-K7gc5Abi5IWqw6eILawCtFm8KdV12iTab1+IZsz4iOg=",
+      "hash": "sha256-p1srKQMB35eYkVm0oAu74UaxHjlrhDYR1SIIjpnx4QQ=",
       "url": "_framework\/System.Collections.dll"
     },
     {
@@ -109,7 +109,7 @@
       "url": "_framework\/System.ComponentModel.dll"
     },
     {
-      "hash": "sha256-ndUjwIpR3\/W4aZV6ychwtWLNJkvSdnaqyRKkurDlk5s=",
+      "hash": "sha256-pN0decMWxKrTVMTKZx1euFFQwkSLoTmjCB9qv4Yc9v4=",
       "url": "_framework\/System.Linq.dll"
     },
     {
@@ -145,7 +145,7 @@
       "url": "_framework\/System.Runtime.CompilerServices.Unsafe.dll"
     },
     {
-      "hash": "sha256-8yjjMOWtDFxXDTBU7wsKXnm00MYuSbXTUrd5JPyuHNQ=",
+      "hash": "sha256-oH3SNJ\/kOkChuEYDIeirjcONJwoTvxshUqw9hB85KLQ=",
       "url": "_framework\/System.Runtime.dll"
     },
     {
@@ -233,5 +233,5 @@
       "url": "sample-data\/cards.json"
     }
   ],
-  "version": "\/u+eetf+"
+  "version": "aEOzlJPA"
 };
