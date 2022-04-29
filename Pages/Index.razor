@@ -1,11 +1,11 @@
 ﻿@page "/"
-@inject CardsService cardsService;
+@inject CardsService CardsService;
 @using SharpCards.Models;
 
 <PageTitle>Index</PageTitle>
 
 <h1>Cards!</h1>
-@if (cards == null)
+@if (CardsService.Cards.Count < 0)
 {
 	<p><em>Loading...</em></p>
 }
@@ -17,12 +17,10 @@ else
 @code {
 	private Card currentCard = new Card();
 
-	private Card[]? cards;
-
-	protected override async Task OnInitializedAsync()
+	protected override void OnInitialized()
 	{
-		cards = await cardsService.GetCards();
-		currentCard = cards != null ? cards[0] : new Card
+		// StateContainer.Cards.Length > 0 ? StateContainer.Cards[0] :
+		currentCard = new Card
 		{
 			Id = Guid.Empty,
 			FrontText = "Front: No cards found",
@@ -32,12 +30,7 @@ else
 
 	private void GetRandom()
 	{
-		currentCard = cards != null ? cards.Where(c => c.Id != currentCard.Id).ToArray()[new Random().Next(0, cards.Length - 1)]
-		: new Card
-		{
-			Id = Guid.Empty,
-			FrontText = "Front: No cards found",
-			BackText = "Back: No cards found"
-		};
+		currentCard = CardsService.Cards.Where(c => c.Id != currentCard.Id).ToArray()[new Random().Next(0,
+		CardsService.Cards.Count - 1)];
 	}
 }

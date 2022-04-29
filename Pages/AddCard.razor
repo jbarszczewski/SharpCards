@@ -1,18 +1,51 @@
 ﻿@page "/addcard"
+@inject CardsService CardsService;
+@* @inject StateContainer StateContainer; *@
+@using SharpCards.Models;
 
 <PageTitle>AddCard</PageTitle>
 
 <h1>AddCard</h1>
 
-<p role="status">Current count: @currentCount</p>
+<p role="status">Current count: @CardsService.Cards.Count</p>
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
-@code {
-    private int currentCount = 0;
+<table class="table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Temp. (C)</th>
+            <th>Temp. (F)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var card in CardsService.Cards)
+        {
+            <tr>
+                <td>@card.Id</td>
+                <td>@card.FrontText</td>
+                <td>@card.BackText</td>
+            </tr>
+        }
+    </tbody>
+</table>
 
-    private void IncrementCount()
+@code {
+    private async Task IncrementCount()
     {
-        currentCount++;
+        if (CardsService.Cards.Count == 0)
+        {
+            CardsService.Cards = (await CardsService.GetCards()).ToList();
+        }
+        else
+        {
+            CardsService.Cards.Add(new Card
+            {
+                Id = Guid.NewGuid(),
+                FrontText = "FrontText",
+                BackText = "BackText"
+            });
+        }
     }
 }
