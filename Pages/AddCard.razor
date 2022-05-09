@@ -1,6 +1,5 @@
 ﻿@page "/addcard"
 @inject CardsService CardsService;
-@* @inject StateContainer StateContainer; *@
 @using SharpCards.Models;
 
 <PageTitle>AddCard</PageTitle>
@@ -36,10 +35,11 @@
     {
         if (CardsService.Cards.Count == 0)
         {
-            CardsService.Cards = (await CardsService.GetCards()).ToList();
+            await CardsService.InitWithStatic();
         }
         else
         {
+            await CardsService.InitWithStatic();
             CardsService.Cards.Add(new Card
             {
                 Id = Guid.NewGuid(),
