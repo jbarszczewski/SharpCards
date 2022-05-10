@@ -61,7 +61,7 @@
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-OuEvZ7CI7aca823iiKsMABk3qmVzDsSho2frUl+haZA=",
+      "hash": "sha256-2RnE6nyRsrs\/rfPdVxts084v52HDNoeOynJ21frCUhk=",
       "url": "index.html"
     },
     {
@@ -249,5 +249,5 @@
       "url": "_content\/DnetIndexedDb\/rxjs.min.js"
     }
   ],
-  "version": "1DprXGz6"
+  "version": "IBcy5P02"
 };
