@@ -1,35 +1,36 @@
 ﻿@page "/"
+@using SharpCards.Models
 @inject CardsService CardsService;
-@using SharpCards.Models;
-@using SharpCards.Database;
 
 <PageTitle>Index</PageTitle>
 
 <h1>Cards!</h1>
 @if (CardsService.Cards.Count < 0)
 {
-	<p><em>Loading...</em></p>
-}
-else
+    <p>
+        <em>Loading...</em>
+    </p>
+} else
 {
-	<button class="btn btn-primary" @onclick="GetRandom">Give me random!</button>
-	<CardDetails Card=currentCard />
+    <button class="btn btn-primary" @onclick="GetRandom">Give me random!</button>
+    <CardDetails Card=_currentCard/>
 }
+
 @code {
-	private Card currentCard = new Card();
+    private Card _currentCard = new();
 
-	protected override async Task OnInitializedAsync()
-	{
-		if (CardsService.Cards.Count == 0)
-		{
-			await CardsService.Init();		
-		}
+    protected override async Task OnInitializedAsync()
+    {
+        if (!CardsService.IsInitialized)
+        {
+            await CardsService.Init();
+        }
+        var cards = CardsService.Cards.ToArray();
+        _currentCard = CardsService.Cards.First();
+    }
 
-		currentCard = CardsService.Cards.First();
-	}
-
-	private void GetRandom()
-	{
-		currentCard = CardsService.Cards.Where(c => c.Id != currentCard.Id).ToArray()[new Random().Next(0, CardsService.Cards.Count - 1)];
-	}
+    private void GetRandom()
+    {
+        _currentCard = CardsService.Cards.Where(c => c.Id != _currentCard.Id).ElementAt(new Random().Next(0, CardsService.Cards.Count - 1));
+    }
 }

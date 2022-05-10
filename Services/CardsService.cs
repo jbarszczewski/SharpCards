@@ -6,25 +6,22 @@ namespace SharpCards.Services;
 
 public class CardsService
 {
+	private readonly CardsDataIndexedDb _database;
 	private readonly HttpClient _http;
-	private readonly CardsDataIndexedDb database;
 
 	public CardsService(HttpClient http, CardsDataIndexedDb database)
 	{
 		_http = http;
-		this.database = database;
-		new Action(async () =>
-		{
-			Cards = await Init();
-		})();
-
+		_database = database;
 	}
+	public bool IsInitialized { get; private set; }
 	public IList<Card> Cards { get; private set; } = new List<Card>();
-	public async ValueTask<IList<Card>> Init()
+	public async ValueTask Init()
 	{
-		_ = await database.OpenIndexedDb();
-		var cards = await database.GetAll<CardDto>();
-		return cards.Select(c => Card.FromDto(c)).ToList();
+		_ = await _database.OpenIndexedDb();
+		var cards = await _database.GetAll<CardDto>();
+		Cards = cards.Select(Card.FromDto).ToList();
+		IsInitialized = true;
 	}
 
 	public async ValueTask InitWithStatic()
@@ -37,6 +34,6 @@ public class CardsService
 			Console.WriteLine(r.Id);
 			return r;
 		});
-		_ = await database.AddItems(staticCards);
+		_ = await _database.AddItems(staticCards);
 	}
 }

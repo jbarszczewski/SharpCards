@@ -1,6 +1,6 @@
 ﻿@page "/addcard"
+@using SharpCards.Models
 @inject CardsService CardsService;
-@using SharpCards.Models;
 
 <PageTitle>AddCard</PageTitle>
 
@@ -12,21 +12,21 @@
 
 <table class="table">
     <thead>
-        <tr>
-            <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Temp. (F)</th>
-        </tr>
+    <tr>
+        <th>Date</th>
+        <th>Temp. (C)</th>
+        <th>Temp. (F)</th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var card in CardsService.Cards)
-        {
-            <tr>
-                <td>@card.Id</td>
-                <td>@card.FrontText</td>
-                <td>@card.BackText</td>
-            </tr>
-        }
+    @foreach (var card in CardsService.Cards)
+    {
+        <tr>
+            <td>@card.Id</td>
+            <td>@card.FrontText</td>
+            <td>@card.BackText</td>
+        </tr>
+    }
     </tbody>
 </table>
 
@@ -36,8 +36,7 @@
         if (CardsService.Cards.Count == 0)
         {
             await CardsService.InitWithStatic();
-        }
-        else
+        } else
         {
             await CardsService.InitWithStatic();
             CardsService.Cards.Add(new Card

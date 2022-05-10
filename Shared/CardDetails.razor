@@ -1,13 +1,12 @@
-﻿@using SharpCards.Models;
-
+﻿@using SharpCards.Models
 <div class="alert alert-secondary mt-4">
     <strong>@Card.FrontText</strong>
-    <br />
+    <br/>
     <span>@Card.BackText</span>
 
 </div>
 
 @code {
     [Parameter]
-    public Card Card { get; set; } = new Card();
+    public Card Card { get; set; } = new();
 }
