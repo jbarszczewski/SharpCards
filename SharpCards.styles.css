@@ -22,20 +22,20 @@ main[b-baecz358gs] {
     align-items: center;
 }
 
-    .top-row[b-baecz358gs]  a, .top-row[b-baecz358gs]  .btn-link {
-        white-space: nowrap;
-        margin-left: 1.5rem;
-        text-decoration: none;
-    }
+.top-row[b-baecz358gs]  a, .top-row[b-baecz358gs]  .btn-link {
+    white-space: nowrap;
+    margin-left: 1.5rem;
+    text-decoration: none;
+}
 
-    .top-row[b-baecz358gs]  a:hover, .top-row[b-baecz358gs]  .btn-link:hover {
-        text-decoration: underline;
-    }
+.top-row[b-baecz358gs]  a:hover, .top-row[b-baecz358gs]  .btn-link:hover {
+    text-decoration: underline;
+}
 
-    .top-row[b-baecz358gs]  a:first-child {
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+.top-row[b-baecz358gs]  a:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 @media (max-width: 640.98px) {
     .top-row:not(.auth)[b-baecz358gs] {
@@ -87,7 +87,7 @@ main[b-baecz358gs] {
 
 .top-row[b-qv093h04tc] {
     height: 3.5rem;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .navbar-brand[b-qv093h04tc] {
@@ -106,30 +106,30 @@ main[b-baecz358gs] {
     padding-bottom: 0.5rem;
 }
 
-    .nav-item:first-of-type[b-qv093h04tc] {
-        padding-top: 1rem;
-    }
+.nav-item:first-of-type[b-qv093h04tc] {
+    padding-top: 1rem;
+}
 
-    .nav-item:last-of-type[b-qv093h04tc] {
-        padding-bottom: 1rem;
-    }
+.nav-item:last-of-type[b-qv093h04tc] {
+    padding-bottom: 1rem;
+}
 
-    .nav-item[b-qv093h04tc]  a {
-        color: #d7d7d7;
-        border-radius: 4px;
-        height: 3rem;
-        display: flex;
-        align-items: center;
-        line-height: 3rem;
-    }
+.nav-item[b-qv093h04tc]  a {
+    color: #d7d7d7;
+    border-radius: 4px;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    line-height: 3rem;
+}
 
 .nav-item[b-qv093h04tc]  a.active {
-    background-color: rgba(255,255,255,0.25);
+    background-color: rgba(255, 255, 255, 0.25);
     color: white;
 }
 
 .nav-item[b-qv093h04tc]  a:hover {
-    background-color: rgba(255,255,255,0.1);
+    background-color: rgba(255, 255, 255, 0.1);
     color: white;
 }
 
