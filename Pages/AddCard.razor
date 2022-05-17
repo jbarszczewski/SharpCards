@@ -1,5 +1,7 @@
 ﻿@page "/addcard"
 @using SharpCards.Models
+@using System.IO
+@inject IJSRuntime JS
 @inject CardsService CardsService;
 
 <PageTitle>AddCard</PageTitle>
@@ -8,50 +10,55 @@
 
 <p role="status">Current count: @CardsService.Cards.Count</p>
 <div class="card-deck">
-<div class="card card-body">
-    <h2>Add new card</h2>
-<EditForm Model="@newCard" OnValidSubmit="@HandleValidSubmit">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-    <div class="form-group">
-        <label class="col-sm-2 col-form-label" for="frontText">Front text</label>
-        <InputTextArea class="form-control" id="frontText" @bind-Value="newCard.FrontText" />
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 col-form-label" for="BackText">Back text</label>
-        <InputTextArea class="form-control" id="backText" @bind-Value="newCard.BackText" />
+    <div class="card card-body">
+        <h2>Add new card</h2>
+    <EditForm Model="@newCard" OnValidSubmit="@HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="form-group">
+            <label class="col-sm-2 col-form-label" for="frontText">Front text</label>
+            <InputTextArea class="form-control" id="frontText" @bind-Value="newCard.FrontText" />
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 col-form-label" for="BackText">Back text</label>
+            <InputTextArea class="form-control" id="backText" @bind-Value="newCard.BackText" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add</button>
+    </EditForm>
     </div>
 
-    <button type="submit" class="btn btn-primary">Add</button>
-</EditForm>
-</div>
-
-<div class="card card-body">
-<h2>Cards</h2>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Front Text</th>
-            <th>Back Text</th>
-            <th>Delete</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var card in CardsService.Cards)
-        {
+    <div class="card card-body">
+    <h2>Cards</h2>
+    <table class="table">
+        <thead>
             <tr>
-                <td>@card.Id</td>
-                <td>@card.FrontText</td>
-                <td>@card.BackText</td>
-                <td>
-                    <button class="btn btn-danger" @onclick="() => DeleteCard(card.Id)">Delete</button>
-                </td>
+                <th>Id</th>
+                <th>Front Text</th>
+                <th>Back Text</th>
+                <th>Delete</th>
             </tr>
-        }
-    </tbody>
-</table>
-</div>
+        </thead>
+        <tbody>
+            @foreach (var card in CardsService.Cards)
+            {
+                <tr>
+                    <td>@card.Id</td>
+                    <td>@card.FrontText</td>
+                    <td>@card.BackText</td>
+                    <td>
+                        <button class="btn btn-danger" @onclick="() => DeleteCard(card.Id)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+    <div class="card card-body">
+        <button class="btn btn-primary" @onclick="DownloadCards">Download cards</button>
+        <label class="col-sm-2 col-form-label" for="BackText">Upload JSON</label>
+        <InputFile OnChange="@LoadFiles" />
+    </div>
 </div>
 @code {
     private Card newCard = new Card() { Id = Guid.NewGuid()};
@@ -75,5 +82,21 @@
     {
         Console.WriteLine("Deleting card with id: " + id);
         await CardsService.DeleteCard(id);
+    }
+
+    private async Task DownloadCards()
+    {
+        var cardsStream = CardsService.GetCardsStream();
+        var fileName = "cards.json";
+
+        using var streamRef = new DotNetStreamReference(stream: cardsStream);
+
+        await JS.InvokeVoidAsync("downloadFileFromStream", fileName, streamRef);
+    }    
+
+     private async Task LoadFiles(InputFileChangeEventArgs e)
+    {
+        var jsonInput = await new StreamReader(e.File.OpenReadStream()).ReadToEndAsync();                
+        await CardsService.AddCardsFromJson(jsonInput);
     }
 }
