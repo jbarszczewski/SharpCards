@@ -1,11 +1,10 @@
 # Flip Cards
 
+Simple flash cards app that can be accessed here:
+[https://jbarszczewski.github.io/SharpCards/](https://jbarszczewski.github.io/SharpCards/)
+
 ## Development
 
-To run Tailwind CSS in watch mode:
+To run  in watch mode:
 
-```npx tailwindcss -o tailwind.css --watch```
-
-To run trunk in watch mode:
-
-```trunk serve --open```
+```dotnet watch```

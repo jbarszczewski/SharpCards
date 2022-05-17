@@ -5,15 +5,25 @@
 <PageTitle>Index</PageTitle>
 
 <h1>Cards!</h1>
-@if (CardsService.Cards.Count < 0)
+@if (!CardsService.IsInitialized)
 {
     <p>
-        <em>Loading...</em>
-    </p>
-} else
+    <em>Loading...</em>
+</p>
+}
+else if (CardsService.Cards.Count == 0)
 {
+    <p>
+    <em>No cards in database!</em>
+</p>
+    <button class="btn btn-secondary" @onclick="InitWithStatic">Init with samples</button>
+
+}
+else
+{
+    <p role="status">Current count: @CardsService.Cards.Count</p>
     <button class="btn btn-primary" @onclick="GetRandom">Give me random!</button>
-    <CardDetails Card=_currentCard/>
+    <CardDetails Card=_currentCard />
 }
 
 @code {
@@ -26,11 +36,21 @@
             await CardsService.Init();
         }
         var cards = CardsService.Cards.ToArray();
-        _currentCard = CardsService.Cards.First();
+        if (cards.Any())
+        {
+            _currentCard = cards.First();
+        }
+    }
+
+    private async Task InitWithStatic()
+    {
+        await CardsService.InitWithStatic();
     }
 
     private void GetRandom()
     {
-        _currentCard = CardsService.Cards.Where(c => c.Id != _currentCard.Id).ElementAt(new Random().Next(0, CardsService.Cards.Count - 1));
+        Console.WriteLine("Getting random card...");
+        _currentCard = CardsService.Cards.Where(c => c.Id != _currentCard.Id).ElementAt(new Random().Next(0,
+        CardsService.Cards.Count - 1));
     }
 }

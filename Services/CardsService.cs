@@ -36,4 +36,16 @@ public class CardsService
 		});
 		_ = await _database.AddItems(staticCards);
 	}
+
+	public async ValueTask AddCard(Card newCard)
+	{
+		_ = await _database.AddItems(new List<CardDto> { newCard.ToDto() });
+		Cards.Add(newCard);
+	}
+
+	public async ValueTask DeleteCard(Guid cardGuid)
+	{
+		_ = await _database.DeleteByKey<string, CardDto>(cardGuid.ToString());
+		Cards.RemoveAt(Cards.IndexOf(Cards.First(c => c.Id == cardGuid)));
+	}
 }
